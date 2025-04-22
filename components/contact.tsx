@@ -77,7 +77,7 @@ export default function Contact() {
                       rel="noopener noreferrer"
                       className="font-medium hover:text-primary transition-colors"
                     >
-                      (+963) 951737433
+                      Chat on Whatsapp
                     </Link>
                   </div>
                 </div>
@@ -94,7 +94,7 @@ export default function Contact() {
                       rel="noopener noreferrer"
                       className="font-medium hover:text-primary transition-colors"
                     >
-                      (+963) 951737433
+                      Chat on Telegram
                     </Link>
                   </div>
                 </div>
@@ -120,7 +120,7 @@ export default function Contact() {
                   <Linkedin className="h-5 w-5 text-primary" />
                 </Link>
                 <Link
-                  href="https://github.com"
+                  href="https://github.com/ahmadshahal"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center hover:bg-primary/20 transition-colors"

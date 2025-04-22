@@ -76,7 +76,7 @@ export default function About() {
               </Link>
             </Button>
             <Button variant="ghost" size="icon" asChild className="rounded-full">
-              <Link href="https://github.com" target="_blank" rel="noopener noreferrer">
+              <Link href="https://github.com/ahmadshahal" target="_blank" rel="noopener noreferrer">
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </Link>
