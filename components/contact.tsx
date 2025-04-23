@@ -1,14 +1,86 @@
 "use client"
 
+import type React from "react"
+
 import { motion } from "framer-motion"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, Send, MapPin, MessageSquare, Github, Linkedin } from "lucide-react"
+import { Mail, Phone, Send, MapPin, MessageSquare, Github, Linkedin, Loader2 } from "lucide-react"
 import Link from "next/link"
+import { useState } from "react"
+import { sendContactEmail } from "@/lib/actions"
+import { useToast } from "@/hooks/use-toast"
 
 export default function Contact() {
+  const { toast } = useToast()
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  })
+  const [errors, setErrors] = useState<Record<string, string[]>>({})
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+
+    // Clear error when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => {
+        const newErrors = { ...prev }
+        delete newErrors[name]
+        return newErrors
+      })
+    }
+  }
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setErrors({})
+
+    try {
+      const result = await sendContactEmail(formData)
+
+      if (result.success) {
+        toast({
+          title: "Message Sent",
+          description: "Thank you for your message. I'll get back to you soon!",
+        })
+
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        })
+      } else {
+        toast({
+          title: "Error",
+          description: result.message,
+          variant: "destructive",
+        })
+
+        if (result.errors) {
+          setErrors(result.errors)
+        }
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
   return (
     <section id="contact" className="py-24">
       <motion.div
@@ -148,36 +220,79 @@ export default function Contact() {
             <CardContent className="p-6">
               <h3 className="text-xl font-bold mb-6">Send Me a Message</h3>
 
-              <form className="space-y-4">
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <label htmlFor="name" className="text-sm font-medium">
                       Name
                     </label>
-                    <Input id="name" placeholder="Your name" />
+                    <Input
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      placeholder="Your name"
+                      className={errors.name ? "border-red-500" : ""}
+                    />
+                    {errors.name && <p className="text-xs text-red-500">{errors.name[0]}</p>}
                   </div>
                   <div className="space-y-2">
                     <label htmlFor="email" className="text-sm font-medium">
                       Email
                     </label>
-                    <Input id="email" type="email" placeholder="Your email" />
+                    <Input
+                      id="email"
+                      name="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder="Your email"
+                      className={errors.email ? "border-red-500" : ""}
+                    />
+                    {errors.email && <p className="text-xs text-red-500">{errors.email[0]}</p>}
                   </div>
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="subject" className="text-sm font-medium">
                     Subject
                   </label>
-                  <Input id="subject" placeholder="Subject" />
+                  <Input
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="Subject"
+                    className={errors.subject ? "border-red-500" : ""}
+                  />
+                  {errors.subject && <p className="text-xs text-red-500">{errors.subject[0]}</p>}
                 </div>
                 <div className="space-y-2">
                   <label htmlFor="message" className="text-sm font-medium">
                     Message
                   </label>
-                  <Textarea id="message" placeholder="Your message" rows={5} />
+                  <Textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Your message"
+                    rows={5}
+                    className={errors.message ? "border-red-500" : ""}
+                  />
+                  {errors.message && <p className="text-xs text-red-500">{errors.message[0]}</p>}
                 </div>
-                <Button type="submit" className="w-full">
-                  <Send className="h-4 w-4 mr-2" />
-                  Send Message
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4 mr-2" />
+                      Send Message
+                    </>
+                  )}
                 </Button>
               </form>
             </CardContent>
