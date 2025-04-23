@@ -61,11 +61,11 @@ export default function About() {
               </Link>
             </Button>
 
-            <Button variant="outline" asChild>
-              <Link href="#" className="flex items-center gap-1">
+            <a href="/resume.pdf" download="ahmad-alshahal-resume.pdf">
+              <Button variant="outline">
                 Download Resume <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
+              </Button>
+            </a>
           </div>
 
           <div className="flex gap-4 mt-6">
@@ -132,7 +132,7 @@ export default function About() {
             </div>
             <h3 className="text-xl font-bold mb-2">Android Development</h3>
             <p className="text-muted-foreground">
-            My love for mobile devices is what first pulled me into development. I started with Android because I was fascinated by how apps worked under the hood. I learned Java and Kotlin, built small projects, and gradually took on more complex work using Android Jetpack libraries, Firebase, and architecture patterns like MVVM. Over time, I gained hands-on experience creating user-friendly, scalable apps. Android was where I found my passion for building clean, functional mobile experiences.
+              My love for mobile devices is what first pulled me into development. I started with Android because I was fascinated by how apps worked under the hood. I learned Java and Kotlin, built small projects, and gradually took on more complex work using Android Jetpack libraries, Firebase, and architecture patterns like MVVM. Over time, I gained hands-on experience creating user-friendly, scalable apps. Android was where I found my passion for building clean, functional mobile experiences.
             </p>
           </div>
 
@@ -150,7 +150,7 @@ export default function About() {
             </div>
             <h3 className="text-xl font-bold mb-2">Flutter Development</h3>
             <p className="text-muted-foreground">
-            After building a solid base in Android, I was excited to explore cross-platform development—so I jumped into Flutter. I quickly picked up Dart and was impressed by how fast and efficient it was to build apps for both Android and iOS from a single codebase. With Flutter, I’ve built apps that look great, perform well, and are easy to maintain. Now, I work confidently with both Flutter and native Android, choosing whichever fits the project best.
+              After building a solid base in Android, I was excited to explore cross-platform development—so I jumped into Flutter. I quickly picked up Dart and was impressed by how fast and efficient it was to build apps for both Android and iOS from a single codebase. With Flutter, I’ve built apps that look great, perform well, and are easy to maintain. Now, I work confidently with both Flutter and native Android, choosing whichever fits the project best.
             </p>
           </div>
         </div>

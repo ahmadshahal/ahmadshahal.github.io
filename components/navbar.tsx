@@ -54,9 +54,8 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled ? "bg-background/80 backdrop-blur-md border-b" : "bg-transparent"
-      }`}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${scrolled ? "bg-background/80 backdrop-blur-md border-b" : "bg-transparent"
+        }`}
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-16">
@@ -93,9 +92,11 @@ export default function Navbar() {
             <div className="flex items-center ml-4 space-x-2">
               <ModeToggle />
               <div className="relative group">
-                <Button variant="outline" size="sm" className="flex items-center gap-1">
-                  Resume <Download className="h-3 w-3" />
-                </Button>
+                <a href="/resume.pdf" download="ahmad-alshahal-resume.pdf">
+                  <Button variant="outline" size="sm" className="flex items-center gap-1">
+                    Resume <Download className="h-3 w-3" />
+                  </Button>
+                </a>
               </div>
               <Button size="sm" asChild>
                 <a href="#contact" onClick={(e) => handleScrollToSection(e, "contact")}>
@@ -130,9 +131,11 @@ export default function Navbar() {
               </a>
             ))}
             <div className="flex flex-col gap-2 p-3">
-              <Button variant="outline" size="sm" className="flex items-center justify-center gap-1">
-                Resume <Download className="h-3 w-3" />
-              </Button>
+              <a href="/resume.pdf" download="ahmad-alshahal-resume.pdf">
+                <Button variant="outline" size="sm" className="flex items-center justify-center gap-1">
+                  Resume <Download className="h-3 w-3" />
+                </Button>
+              </a>
               <Button size="sm" asChild>
                 <a href="#contact" onClick={(e) => handleScrollToSection(e, "contact")}>
                   Get in Touch
