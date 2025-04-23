@@ -23,7 +23,7 @@ export default function About() {
 
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4">Ahmad Al-Shahal</h1>
 
-          <h2 className="text-xl md:text-2xl font-medium text-primary mb-6">Android Softawre Engineer</h2>
+          <h2 className="text-xl md:text-2xl font-medium text-primary mb-6">Android Software Engineer</h2>
 
           <p className="text-lg text-muted-foreground max-w-2xl mb-8">
             Hello! I'm Ahmad, a detail-oriented Android Software Engineer who thrives on turning ideas into polished mobile
